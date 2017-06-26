@@ -68,7 +68,7 @@ def retrieve_categories(categories)
   end
 end
 
-@from = 2000
+@from = 2008
 @to = 2017
 
 hash = {}
@@ -82,7 +82,7 @@ result = (@from..@to).map.with_index do |year, yidx|
   (1..12).map.with_index do |month, midx|
     numerator = hash[:ml_cats][yidx][midx]
     denominator = hash[:all_cats][yidx][midx]
-    "#{year}-#{month}, #{(numerator.to_f / denominator.to_f) * 100}, #{numerator}" if denominator != '0'
+    "01/#{month}/#{year}, #{(numerator.to_f / denominator.to_f) * 100}, #{numerator}" if denominator != '0'
   end.compact
 end
 
