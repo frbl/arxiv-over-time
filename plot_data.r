@@ -26,9 +26,9 @@ plot_graph <- function() {
     geom_line(aes(y = google_search_total, color = google_search_label, linetype = google_search_label), size = 0.5, show.legend = TRUE) +
     geom_line(aes(y = google_news_total, color = google_news_label, linetype = google_news_label), size = 0.5, show.legend = TRUE) +
     geom_line(aes(y = percentage, color = total_label, linetype = total_label), size = 0.5) +
-    scale_linetype_manual(values = c("dashed", "dotted", "solid")) +
-    scale_color_manual(values = c("red", "orange", "blue")) +
-    #scale_color_manual(values = c("black", "black")) +
+    scale_linetype_manual(values = c("solid", "dotted", "dashed")) +
+    scale_color_manual(values = c("blue", "black", "red")) +
+    #scale_color_manual(values = c("black", "black", "black")) +
     theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
     scale_fill_brewer(palette="Set1")+
     scale_y_continuous(name="Popularity")+
@@ -44,7 +44,7 @@ plot_graph <- function() {
   return(plot)
 }
 #######################
-pdf(file = "figure_1_bw.pdf",
+pdf(file = "ml-google-trends.pdf",
     width=11.75, height=5.47)
 plots <- plot_graph()
 plot(plots)
