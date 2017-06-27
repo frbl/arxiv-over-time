@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 require 'httparty'
 require 'nokogiri'
-require 'byebug'
-require 'json'
 
 def cache(name, data)
   out_file = File.new("#{filename(name)}", "w")
