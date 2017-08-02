@@ -3,8 +3,7 @@ plot_graph <- function() {
   require(ggplot2)
   google_search_data = read.csv("google_data_search.csv")
   google_news_data = read.csv("google_data_news_ml.csv")
-
-  publication_data = read.csv("papers.csv")
+  publication_data = read.csv("papers.csv")[1:dim(google_news_data)[1],]
   publication_data <- cbind(publication_data, google_search_data['google_search_total'])
   publication_data <- cbind(publication_data, google_news_data['google_news_total'])
 
