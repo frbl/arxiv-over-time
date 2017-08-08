@@ -56,24 +56,23 @@ histfunc <- function() {
     dat <- data.frame(xx = x_data,
                       yy = y_data)
 
+    margin <- 50
     p3 <- ggplot(dat, aes(x=xx)) + 
-                #geom_histogram(data = subset(dat,yy='a'), breaks=seq(0, 15, by = 1), fill="#4477AA", alpha=.3) + 
-                geom_histogram(data = subset(dat,yy='completed_at_started_at'), 
-                               breaks=seq(0, 30, by = .1), fill="#4477AA") + 
-                #geom_histogram(data = subset(dat,yy='c'), breaks=seq(0, 15, by = .01), fill="#CC6677", alpha=.3) + 
-                theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
-                theme(axis.text.y = element_text(colour = "black") ) +
-                labs(x="Time in minutes", y="Frequency") +
-                theme(axis.text.x = element_text(colour = "black") ) +
-                theme(axis.title.x = element_text(vjust = -0.5)) +
-                theme(legend.title = element_blank())+
-                theme(legend.position="bottom")+
-                theme(legend.background = element_rect(colour="transparent"))+
-                theme(legend.key = element_rect(fill = "transparent", colour = "transparent")) +
-                theme(legend.key.size= unit(3,"lines"))
-    #grid.arrange(p1, p2, p3, ncol=3)  
-    p3
 
+            geom_histogram(data = subset(dat,yy='completed_at_started_at'), 
+                            breaks=seq(0, 30, by = .1), fill="#CC6677") + 
+            theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
+            theme(axis.text.y = element_text(colour = "black") ) +
+            labs(x="Time in minutes", y="Frequency") +
+            scale_y_continuous(limits = c(0,350 + margin), expand = c(0, 0.7)) +
+            theme(axis.text.x = element_text(colour = "black") ) +
+            theme(axis.title.x = element_text(vjust = -0.5)) +
+            theme(legend.title = element_blank())+
+            theme(legend.position="bottom")+
+            theme(legend.background = element_rect(colour="transparent"))+
+            theme(legend.key = element_rect(fill = "transparent", colour = "transparent")) +
+            theme(legend.key.size= unit(3,"lines"))
+    p3
   }
 }
 
@@ -89,7 +88,7 @@ printstats <- function(dataset, name) {
   print(range(dataset))
   print('')
 }
-pdf(file = "time-to-complete-questionnaire-in-hgi.pdf", width=8, height=8)
+pdf(file = "time-to-complete-questionnaire-in-hgi.pdf", width=5, height=3)
 plot(histfunc())
 dev.off()
 
