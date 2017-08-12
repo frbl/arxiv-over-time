@@ -1,7 +1,6 @@
 #!/usr/bin/env Rscript
 library("ggplot2")
 rm(list=ls(pos='.GlobalEnv',all=TRUE),pos='.GlobalEnv')
-source("multiplot.R")
 set.seed(21341)
 
 top_hat_kernel <- function(k, data) {
@@ -58,8 +57,7 @@ generate_graph <- function(k, raw, title) {
     geom_histogram(data = heartrate.dfold, aes(heartrate), 
                    breaks=seq(60, 125, by = 1), 
                    col="#000000", 
-                   fill="#4477AA", 
-                   alpha = .5)+
+                   fill="#4477AA")+
     
     labs(x="Heart rate", y="Frequency") +
     geom_vline(aes(xintercept= mean(heartrate)-0.5), linetype='dashed', col=1) +
@@ -83,6 +81,9 @@ generate_graph <- function(k, raw, title) {
   print(paste('Median:',median(heartrate)))   
   print(paste('Th:',th_frame$th))   
     merge <- merge + theme_bw() +
+
+    scale_y_continuous(limits = c(0,34), expand = c(0, 0.25)) +
+    scale_x_continuous(limits = c(60,125), expand = c(0, 0.5)) +
     theme(axis.line = element_line(colour = "black"),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
@@ -98,5 +99,7 @@ normal_example <- generate_graph(k = 2, raw = raw, title= "")
 library('plyr')
 count(raw)
 
+pdf(file = "tophat_kernel_only_lines_original_data.pdf", width=10, height=4)
 plot(normal_example)
+dev.off()
 
