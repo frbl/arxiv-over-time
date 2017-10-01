@@ -26,6 +26,10 @@ p3 <- ggplot(dat, aes(x= reorder(xx, -yy))) +
             theme(legend.key = element_rect(fill = "transparent", colour = "transparent")) +
             theme(legend.key.size= unit(3,"lines"))
 
-pdf(file = "mssd-in-hgi.pdf", width=10, height=4)
+pdf(file = "mssd-in-hgi.pdf", width=6, height=3)
+plot(p3)
+dev.off()
+
+tikzDevice::tikz('mssd-in-hgi.tex', standAlone = FALSE, width=6, height=3)
 plot(p3)
 dev.off()

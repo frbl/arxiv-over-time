@@ -41,3 +41,7 @@ myplot <- ggplot(dat, aes(x=xx)) +
 pdf(file = "bimodal-distribution-in-adherance.pdf", width=5, height=3)
 plot(myplot)
 dev.off()
+
+tikzDevice::tikz('bimodal-distribution-in-adherance.tex', standAlone = FALSE, width=5, height=3)
+plot(myplot)
+dev.off()

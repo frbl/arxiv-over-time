@@ -92,3 +92,7 @@ pdf(file = "time-to-complete-questionnaire-in-hgi.pdf", width=5, height=3)
 plot(histfunc())
 dev.off()
 
+tikzDevice::tikz('time-to-complete-questionnaire-in-hgi.tex', standAlone = FALSE, width=5, height=3)
+plot(histfunc())
+dev.off()
+

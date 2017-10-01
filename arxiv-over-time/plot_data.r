@@ -44,8 +44,13 @@ plot_graph <- function() {
   return(plot)
 }
 #######################
-pdf(file = "ml-google-trends.pdf",
-    width=10, height=4)
+pdf(file = "ml-google-trends.pdf", width=6, height=3)
+plots <- plot_graph()
+plot(plots)
+dev.off()
+
+
+tikzDevice::tikz('ml-google-trends.tex', standAlone = FALSE, width=6, height=3)
 plots <- plot_graph()
 plot(plots)
 dev.off()
