@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 plot_graph <- function() {
   require(ggplot2)
+  require(scales)
   google_search_data = read.csv("google_data_search.csv")
   google_news_data = read.csv("google_data_news_ml.csv")
   publication_data = read.csv("papers.csv")[1:dim(google_news_data)[1],]
@@ -9,9 +10,9 @@ plot_graph <- function() {
 
   # Set the labels
   publication_data$total_label <- factor(rep("Popularity on ArXiv", each = nrow(publication_data)))
-  publication_data$precentage_label <- factor(rep("Normalized popularity on ArXiv", each = nrow(publication_data)))
-  publication_data$google_search_label <- factor(rep('Popularity on Google Searches', each = nrow(publication_data)))
-  publication_data$google_news_label <- factor(rep('Popularity on Google News', each = nrow(publication_data)))
+  publication_data$precentage_label <- factor(rep("ArXiv", each = nrow(publication_data)))
+  publication_data$google_search_label <- factor(rep('Google Searches', each = nrow(publication_data)))
+  publication_data$google_news_label <- factor(rep('Google News', each = nrow(publication_data)))
 
   # Normalize the data
   publication_data$total <- publication_data$total / max(publication_data$total) * 100
@@ -20,18 +21,20 @@ plot_graph <- function() {
   publication_data$google_news_total <- publication_data$google_news_total / max(publication_data$google_news_total) * 100
 
   # Convert the data
-  publication_data$Date <- as.Date(publication_data$Date, "%d/%m/%Y")
+  publication_data$Year <- as.Date(publication_data$Date, "%d/%m/%Y")
 
-  plot <- ggplot(publication_data, aes(x = Date)) +
+  plot <- ggplot(publication_data, aes(x = Year)) +
     geom_line(aes(y = google_search_total, color = google_search_label, linetype = google_search_label), size = 0.5, show.legend = TRUE) +
     geom_line(aes(y = google_news_total, color = google_news_label, linetype = google_news_label), size = 0.5, show.legend = TRUE) +
     geom_line(aes(y = percentage, color = precentage_label, linetype = precentage_label), size = 0.5) +
-    scale_linetype_manual(values = c("solid", "dotted", "dashed")) +
-    scale_color_manual(values = c("#DDCC77", "#4477AA", "#CC6677")) +
+    scale_linetype_manual(values = c("solid", "solid", "solid")) +
+    scale_color_manual(values = c("#A3BE8C", "#5E81AC", "#BF616A")) +
+
     #scale_color_manual(values = c("black", "black", "black")) +
     theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
     scale_fill_brewer(palette="Set1")+
-    scale_y_continuous(name="Popularity")+
+    scale_x_date(date_breaks = "1 year", labels = date_format("%Y"), expand = c(0, 0)) +
+    scale_y_continuous(limits = c(0,101), expand = c(0, 0), name="Popularity") +
     theme(axis.text.y = element_text(colour = "black") ) +
     theme(axis.text.x = element_text(colour = "black") ) +
     theme(axis.title.x = element_text(vjust = -0.5)) +

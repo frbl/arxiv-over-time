@@ -3,7 +3,7 @@ require(gridExtra)
 require(ggplot2)
 
 histfunc <- function() {
-  datafile <- '/Users/frbl/Documents/sensitive/Datasets/HoeGekIsNL/Diary_v1/mad_diary_2014-12-13.csv'
+  datafile <- '/Users/frbl/vault/Datasets/HoeGekIsNL/Diary_v1/mad_diary_2014-12-13.csv'
   dataset = read.csv(datafile, sep=';')
   
   # Convert to the correct format
@@ -58,13 +58,15 @@ histfunc <- function() {
 
     margin <- 50
     p3 <- ggplot(dat, aes(x=xx)) + 
-
             geom_histogram(data = subset(dat,yy='completed_at_started_at'), 
-                            breaks=seq(0, 30, by = .1), fill="#CC6677") + 
+                            breaks=seq(0, 0+18, by = 0.5), col='black', fill="#5E81AC") + 
+                            #breaks=seq(0, 0+18, by = 0.5), col='black', fill="#CC6677") + 
             theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
             theme(axis.text.y = element_text(colour = "black") ) +
             labs(x="Time in minutes", y="Frequency") +
-            scale_y_continuous(limits = c(0,350 + margin), expand = c(0, 0.7)) +
+            #theme( plot.margin = unit( c(0.1,0.1,0.1,0.1) , "in" ) )+
+            scale_y_continuous(limits = c(-30,1550 + margin), expand = c(0, 0)) +
+            scale_x_continuous( expand = c(0.01, 0)) +
             theme(axis.text.x = element_text(colour = "black") ) +
             theme(axis.title.x = element_text(vjust = -0.5)) +
             theme(legend.title = element_blank())+

@@ -11,14 +11,15 @@ dat <- data.frame(xx = factor(questionnaire_items),
 margin <- 100
 p3 <- ggplot(dat, aes(x= reorder(xx, -yy))) + 
             #geom_histogram(data = subset(dat,yy='a'), breaks=seq(0, 15, by = 1), fill="#4477AA", alpha=.3) + 
-            geom_bar(aes(weight = yy), fill="#4477AA" ) +
+            geom_bar(aes(weight = yy), width=1, col="#000000", fill="#5E81AC" ) +
             #geom_histogram(data = subset(dat,yy='c'), breaks=seq(0, 15, by = .01), fill="#CC6677", alpha=.3) + 
             theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
             theme(axis.text.y = element_text(colour = "black") ) +
-            labs(x="Diary item", y="Mean Squared Successive Difference") +
+            labs(x="Diary question", y="Mean Squared Successive Difference") +
             theme(axis.text.x = element_text(colour = "black") ) +
             theme( plot.margin = unit( c(0,0,0,0) , "in" ) )+
-            scale_y_continuous(limits = c(0,max(mssds) + margin), expand = c(0, 0)) +
+            scale_y_continuous(limits = c(-25, max(mssds) + margin), expand = c(0, 0)) +
+            scale_x_discrete( expand = c(0.01, 0)) +
             #theme(axis.title.x = element_text(vjust = -0.5)) +
             theme(legend.title = element_blank())+
             theme(legend.position="bottom")+

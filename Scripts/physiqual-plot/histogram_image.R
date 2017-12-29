@@ -57,7 +57,7 @@ generate_graph <- function(k, raw, title) {
     geom_histogram(data = heartrate.dfold, aes(heartrate), 
                    breaks=seq(60, 125, by = 1), 
                    col="#000000", 
-                   fill="#4477AA")+
+                   fill="#5E81AC")+
     
     labs(x="Heart rate", y="Frequency") +
     geom_vline(aes(xintercept= mean(heartrate)-0.5), linetype='dashed', col=1) +
@@ -82,7 +82,7 @@ generate_graph <- function(k, raw, title) {
   print(paste('Th:',th_frame$th))   
     merge <- merge + theme_bw() +
 
-    scale_y_continuous(limits = c(0,34), expand = c(0, 0.25)) +
+    scale_y_continuous(limits = c(0,34), expand = c(0.01, 0.25)) +
     scale_x_continuous(limits = c(60,125), expand = c(0, 0.5)) +
     theme(axis.line = element_line(colour = "black"),
           panel.grid.major = element_blank(),
@@ -103,3 +103,6 @@ pdf(file = "tophat_kernel_only_lines_original_data.pdf", width=10, height=4)
 plot(normal_example)
 dev.off()
 
+tikzDevice::tikz("tophat_kernel_only_lines_original_data.tex", standAlone = FALSE, width=10, height=4)
+plot(normal_example)
+dev.off()

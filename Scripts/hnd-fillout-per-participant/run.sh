@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 ./filled_out_times.R
-./mssd-per-question.R
+#./mssd-per-question.R
 ./distribution-of-adherance.R
 
 

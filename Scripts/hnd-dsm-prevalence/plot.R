@@ -12,11 +12,12 @@ dat <- data.frame(Lifelines = lifelines,
 # melt the data frame for plotting
 data.m <- reshape2::melt(dat, id.vars='names')
 
+
 # plot everything
 the_plot <- ggplot(data.m, aes(names, value)) +
   geom_bar(aes(fill = variable), position = "dodge", stat="identity") + 
   theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
-  scale_fill_manual(values=c("#4477AA", "#CC6677")) +
+  scale_fill_manual(values = c("#5E81AC", "#BF616A")) +
   theme(axis.text.y = element_text(colour = "black") ) +
   labs(x="Number of major depressive disorder DSM symptoms", y="Percentage") +
   theme(axis.text.x = element_text(colour = "black") ) +

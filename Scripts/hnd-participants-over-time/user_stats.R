@@ -34,12 +34,18 @@ plot_graph <- function() {
   plot <- ggplot(number_of_users, aes(x = Date)) + 
     geom_line(data=number_of_users, aes(y = Created.diary.studies, color = type, linetype= type), size = 0.5, show.legend = TRUE) +
     geom_line(aes(y = Participants, color = subs, linetype = subs), size = 0.5) +
-    scale_linetype_manual(values = c("dashed", "solid")) +
-    scale_color_manual(values = c("#4477AA", "#CC6677")) +
+    scale_linetype_manual(values = c("solid", "solid")) +
+    #scale_color_manual(values = c("#4477AA", "#CC6677")) +
+
+    scale_color_manual(values = c("#5E81AC", "#BF616A")) +
+
     theme(panel.background = element_rect(fill = 'transparent', colour = 'black', size=1)) +
     scale_fill_brewer(palette="Set1")+
-    scale_y_continuous(name="Percentage",
-                       labels = function(x){ paste0(x, "\\%") })+
+    scale_y_continuous(
+                       limits = c(-1,17),
+                       name="Percentage",
+                       labels = function(x){ paste0(x, "\\%") }, expand = c(0, 0))+
+    scale_x_date( expand = c(0, 0), name="Date") +
     theme(axis.text.y = element_text(colour = "black") ) +
     theme(axis.text.x = element_text(colour = "black") ) +
     theme(axis.title.x = element_text(vjust = -0.5)) + 
@@ -65,7 +71,6 @@ plot_graph <- function() {
 
 plotje <- plot_graph()
 
-browser()
 pdf(file = "users-over-time.pdf", width=10, height=4)
 plot(plot_graph())
 dev.off()
